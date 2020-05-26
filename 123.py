@@ -1,40 +1,27 @@
 
 import requests
-from requests.exceptions import RequestException
 from urllib.parse import urlencode
 import json
 
 def get_response(offset,limit):
-    para = {
-        'offset':offset,
-        'limit':limit
-    }
-    # 歌曲id
-    musicid = "506092019"
-    #歌曲api地址
-    musicurl = "http://music.163.com/api/v1/resource/comments/R_SO_4_"+musicid+"?"+urlencode(para)
-    #头结构
+    para = {'offset':offset,'limit':limit}
+    musicurl = "http://music.163.com/api/v1/resource/comments/R_SO_4_506092019?"+urlencode(para)
     headers = {
-        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
-        'Accept-Encoding':'gzip, deflate, sdch',
-        'Accept-Language':'zh-CN,zh;q=0.8',
+        'Authority':'music.163.com',
+        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3',
+        'Accept-Encoding':'gzip, deflate, br',
+        'Accept-Language':'zh-CN,zh;q=0.9',
         'Cache-Control':'max-age=0',
-        'Connection':'keep-alive',
-        'Cookie':'vjuids=-13ac1c39b.1620457fd8f.0.074295280a4d9; vjlast=1520491298.1520491298.30; _ntes_nnid=3b6a8927fa622b80507863f45a3ace05,1520491298273; _ntes_nuid=3b6a8927fa622b80507863f45a3ace05; vinfo_n_f_l_n3=054cb7c136982ebc.1.0.1520491298299.0.1520491319539; __utma=94650624.1983697143.1521098920.1521794858.1522041716.3; __utmz=94650624.1521794858.2.2.utmcsr=baidu|utmccn=(organic)|utmcmd=organic; JSESSIONID-WYYY=FYtmJTTpVwmbihVrUad6u76CKxuzXZnfYyPZfK9bi%5CarU936rIdoIiVU50pfQ6JwjGgBvSyZO0%2FR%2BcoboKdPuMztgHCJwzyIgx1ON4v%2BJ2mOvARluNGpRo6lmhA%5CfcfCd3EwdS88sPgxpiiXN%5C6HZZEMQdNRSaHJlcN%5CXY657Faklqdh%3A1522053962445; _iuqxldmzr_=32',
-        'Host':'music.163.com',
+        'Cookie':'_iuqxldmzr_=32; _ntes_nnid=87a0cd153c0aa4f8d9ace35924184d51,1587031929400; _ntes_nuid=87a0cd153c0aa4f8d9ace35924184d51; WM_TID=GGYh%2FU8pBmZAVFEAEFd6QzqxXoa47fsz; UM_distinctid=171953e87127fb-051500ace657ac-376b4502-1fa400-171953e87136e7; vinfo_n_f_l_n3=3c0b9fbab9803446.1.1.1587346843326.1587346848384.1589298054342; NTES_OSESS=MMSXReGgBGagxDAOKMGVaT8bJBh13RSZ8kgpbsUqYHyTkkrONDXewnEdxw6YMA8XTilyBwlWHTKZdjdmfr0lkAK60_M2jyEQwntRS.7eootXxKK6GZ6Cw_sG4aNJCZntR4sYOGvG1q9mC3jfG9xlm7MxvpcMqfO9uH1JznMAv08BPVOh_nGmLsZEhjYyS0_Du7VL3LtIG33Me2Zptu2suFGmfEQlKem4Z_NqE88C5zl0X; P_OINFO=b26a7dbf397cec4c4f032edb64bc37ce@tencent.163.com|1589371394|0|cc|00&99|null#0|null|cc_client&cc|b26a7dbf397cec4c4f032edb64bc37ce@tencent.163.com; JSESSIONID-WYYY=ZvyIYQSRa4fKRAUbVrKClm7eESn6CHCXS%2Fr%2FjZoPCS125XchvNnXv3xJ%2BEJTFrRWxr0tnluRX1Zl3ae5eaETEDAc9DvOrEqeZ8qgAMsNZEKlY0Re%2BP9JEbp5RoSz8BvXU7KSYozizr8fm%2BmSD9xalXeMKo6uOfDT5xsV%2FjPhUUotAA1E%3A1590466948456; WM_NI=0Ndj%2B7JotCCPj%2FRk3XqLT%2FbnzQFl0vR54nk4aU0BWGpZoWO9FHgO%2FVECSn%2B901K2Mh%2F5TDNWL6KDHM2YA5ADCbnLkd3h41fZPtHjsYN5mckS1IKRprdbcMnGYSCpQI8TYUQ%3D; WM_NIKE=9ca17ae2e6ffcda170e2e6ee91d36efbb6a894f55c95b88fa6c55b878b8f84b55d989cfab7ae4e8da7be99e62af0fea7c3b92af492ac8baa3d8ab1bca4c25caaf19e8cb254b3949cd0e166ba8f8a8db37e92ebfc8fea40a38b00a3d64db486a1b8ce338698a9b0ae5e879d9d8faa33f4ef85d3d064edeb9ca5cd5d90ea85a5cb47f2878fd6c45081bea2adea70f1b8fcd2e55294ac888bf2538eeba384ea59f39785b3f37aa8beadaeed4d9b8d8d91d443fc8c97b6d437e2a3',
         'Upgrade-Insecure-Requests':'1',
-        'User-Agent':'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.221 Safari/537.36 SE 2.X MetaSr 1.0'
+        'User-Agent':'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36'
     }
-    try:
-        response = requests.post(musicurl,headers=headers)
-        if response.status_code == 200:
-            return response.content
-    except RequestException:
-        print(" ")
+    response = requests.post(musicurl,headers=headers)
+    return response.content
 
-#解析返回页
-def parse_return(html):
-    data = json.loads(html)#将返回的值格式化为json
+
+def parse_return(gethtml):
+    data = json.loads(gethtml)
     if data.get('comments'):
         comm = data['comments']
         for item in comm:
@@ -45,11 +32,11 @@ def parse_return(html):
                 '赞': item['likedCount']
             }
             print(data)
-        print('-------------------------------------------------------------------------------------------------------------------------------------------------------------')
+        print('-------------------------------------------------分割---------------------------------------------------------' )
 def main(offset):
     gethtml = get_response(offset,10)
     parse_return(gethtml)
 
 if __name__ == '__main__':
-    for x in range(0,20):
+    for x in range(0,40):
         main(x*10)
